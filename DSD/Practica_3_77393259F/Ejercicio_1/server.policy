@@ -1,0 +1,4 @@
+//Fichero server.policy del directorio “simple”
+grant codeBase "file:/home/migue/Escritorio/DSD/Practica_3" {
+permission java.security.AllPermission;
+};

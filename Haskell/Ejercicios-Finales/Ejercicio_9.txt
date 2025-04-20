@@ -1,0 +1,8 @@
+
+La lógica combinatoria, se centra en combinadores, que son funciones sin variables libres. Los combinadores fundamentales son:
+
+    K (combinador constante): K x y = x
+    S (combinador de aplicación): S f g x = f x (g x)
+
+En este contexto, los términos son combinadores en lugar de funciones con variables, y su propósito es la composición de funciones sin necesidad de la existencia explícita de variables.
+ La lógica combinatoria (LC) es el fundamento del cálculo lambda, al eliminar el último tipo de variable de éste: la variable lambda. En LC las expresiones lambda (usadas para permitir la abstracción funcional) son substituidas por un sistema limitado de combinadores, las funciones primitivas que no contienen ninguna variable libre (ni ligada). Es fácil transformar expresiones lambda en expresiones combinatorias, y puesto que la reducción de un combinador es más simple que la reducción lambda, LC se ha utilizado como la base para la puesta en práctica de algunos lenguajes de programación funcionales no-estrictos en software y hardware.

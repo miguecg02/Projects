@@ -1,0 +1,66 @@
+module Ejercicios_Finales (module Ejercicios_Finales) where
+
+
+{-El tipo de dato conjunto representa una colección de elementos en la que cada elemento es único
+(no hay elementos repetidos) y no se impone un orden específico sobre los elementos.-}
+
+
+data Conjunto a = Vacio | Nodo a (Conjunto a) deriving Show
+
+-- Función para agregar un elemento al conjunto
+add :: (Eq a) => a -> Conjunto a -> Conjunto a
+add x Vacio = Nodo x Vacio
+add x conjunto@(Nodo y resto)
+ |x == y  = conjunto -- Si ya se encuentra en el conjunto no se agrega
+ |otherwise = Nodo y (add x resto) --En otro caso hacemos llamada recursiva a la funcion
+
+
+-- Función para eliminar  un elemento al conjunto
+delete :: (Eq a) => a -> Conjunto a -> Conjunto a
+delete  x Vacio =  Vacio
+delete x conjunto@(Nodo y resto)
+ |x == y  = conjunto 
+ |otherwise = Nodo y (delete  x resto) --En otro caso hacemos llamada recursiva a la funcion
+
+
+
+inclusion :: (Eq a )=>  Conjunto a -> Conjunto a -> Bool
+inclusion Vacio _ = True
+inclusion (Nodo x resto) conjuntob
+  | pertenece x conjuntob = inclusion resto conjuntob
+  | otherwise             = False
+
+union ::(Eq a ) =>  Conjunto a -> Conjunto a -> Conjunto a
+union Vacio conjuntob  = conjuntob
+union (Nodo x resto) conjuntob
+ | pertenece x conjuntob = union resto conjuntob
+ |otherwise = Nodo x (union resto conjuntob)
+
+interseccion :: (Eq a) => Conjunto a -> Conjunto a -> Conjunto a
+interseccion Vacio conjuntob = Vacio
+interseccion (Nodo x resto) conjuntob
+  | pertenece x conjuntob = Nodo x (interseccion resto conjuntob)
+  | otherwise             = interseccion resto conjuntob
+
+diferencia :: (Eq a) => Conjunto a -> Conjunto a ->Conjunto a
+diferencia Vacio conjuntob = Vacio
+diferencia (Nodo x resto) conjuntob
+ | pertenece x conjuntob = diferencia resto conjuntob
+ |otherwise = Nodo x (diferencia resto conjuntob)
+
+
+diferenciaSimetrica :: (Eq a) => Conjunto a -> Conjunto a -> Conjunto a
+diferenciaSimetrica conjuntoA conjuntoB = union (diferencia conjuntoA conjuntoB) (diferencia conjuntoB conjuntoA)
+
+
+
+pertenece :: (Eq a) => a -> Conjunto  a ->Bool
+pertenece _ Vacio = False
+pertenece x (Nodo y resto)
+  | x == y    = True
+  | otherwise = pertenece x resto
+
+
+hacerlist :: Conjunto a -> [a]
+hacerlist Vacio = []
+hacerlist (Nodo x resto) = x : hacerlist resto

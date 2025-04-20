@@ -1,0 +1,15 @@
+COMPILACIÓN INSTRUCCIONES
+
+1ª opción
+ghc -o menu_pila Main.hs
+
+2ª opción
+ghc --make Main.hs
+
+o bien
+
+ghc --make -o menu_pila  Main.hs
+
+3ª opción
+ghc -c -O Pila.hs Main.hs
+ghc -o menu_pila -O Pila.o Main.o
